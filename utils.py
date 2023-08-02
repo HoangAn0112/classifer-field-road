@@ -16,7 +16,7 @@ def save_model(epochs, model, optimizer, criterion):
                 'model_state_dict': model.state_dict(),
                 'optimizer_state_dict': optimizer.state_dict(),
                 'loss': criterion,
-                }, 'output/model.pth')
+                }, 'output/model_efficientnet.pth')
 
 def save_plots(train_acc, valid_acc, train_loss, valid_loss):
     """
@@ -30,12 +30,12 @@ def save_plots(train_acc, valid_acc, train_loss, valid_loss):
     )
     plt.plot(
         valid_acc, color='blue', linestyle='-', 
-        label='validataion accuracy'
+        label='validation accuracy'
     )
     plt.xlabel('Epochs')
     plt.ylabel('Accuracy')
     plt.legend()
-    plt.savefig('output/accuracy.png')
+    plt.savefig('output/accuracy_efficientnet.png')
     
     # loss plots
     plt.figure(figsize=(10, 7))
@@ -45,12 +45,12 @@ def save_plots(train_acc, valid_acc, train_loss, valid_loss):
     )
     plt.plot(
         valid_loss, color='red', linestyle='-', 
-        label='validataion loss'
+        label='validation loss'
     )
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
     plt.legend()
-    plt.savefig('output/loss.png')
+    plt.savefig('output/loss_efficientnet.png')
 
 # training
 def train(model, trainloader, optimizer, criterion):
@@ -77,7 +77,7 @@ def train(model, trainloader, optimizer, criterion):
         loss.backward()
         # update the optimizer parameters
         optimizer.step()
-    
+
     # loss and accuracy for the complete epoch
     epoch_loss = train_running_loss / counter
     epoch_acc = 100. * (train_running_correct / len(trainloader.dataset))
@@ -93,7 +93,7 @@ def validate(model, testloader, criterion):
     with torch.no_grad():
         for i, data in tqdm(enumerate(testloader), total=len(testloader)):
             counter += 1
-            
+
             image, labels = data
             image = image.to(device)
             labels = labels.to(device)
@@ -105,7 +105,7 @@ def validate(model, testloader, criterion):
             # calculate the accuracy
             _, preds = torch.max(outputs.data, 1)
             valid_running_correct += (preds == labels).sum().item()
-        
+
     # loss and accuracy for the complete epoch
     epoch_loss = valid_running_loss / counter
     epoch_acc = 100. * (valid_running_correct / len(testloader.dataset))
@@ -118,13 +118,14 @@ def visualize_test_predictions(model, test_loader, class_labels, num_images=10, 
         for inputs, target in test_loader:
             inputs = inputs.to(device)
             target = target.to(device)
-                    
+
             outputs = model(inputs)
             _, predicted_classes = torch.max(outputs, 1)
 
             images.extend(inputs)
             predicted_labels.extend(predicted_classes.numpy())
             true_labels.extend(target.numpy())
+            print(outputs)
 
     #display test images
     num_images = min(num_images, len(images))
@@ -138,7 +139,7 @@ def visualize_test_predictions(model, test_loader, class_labels, num_images=10, 
         plt.subplot(rows, cols, i + 1)
         image = images[i].numpy().transpose(1, 2, 0)
         image = image * [0.24362235, 0.2223072, 0.2965594] + [0.5374407, 0.5403282, 0.438259]
-        plt.imshow(image)
+        plt.imshow((image*255).astype(numpy.uint8))
         plt.title(f"Predict {class_labels[predicted_labels[i].item()]}", fontsize=10)
         plt.axis('off')
 

@@ -7,17 +7,14 @@ from torch.utils.data import DataLoader, random_split
 PATH_DATA = 'dataset/train_images'
 
 # set up parameters
-batch_size = 8
+batch_size = 32
 validation_split = .2
 shuffle_dataset = True
-random_seed= 42
+random_seed= 52
 
 # parameters for pixel normalizing
 train_mean = (0.45512244,0.46718585,0.41516596)
 train_std= (0.24454536,0.23760799,0.27499264)
-
-test_mean = (0.5374407, 0.5403282, 0.438259)
-test_std = (0.24362235, 0.2223072, 0.2965594)
 
 # import data
 data = ImageFolder(
@@ -31,15 +28,16 @@ train_dataset, valid_dataset = random_split(data, [train_size,valid_size])
 
 # transform for train
 train_transform = transforms.Compose(
-    [transforms.Resize((224, 224)),
-     transforms.ToTensor()])
-#     transforms.Normalize(train_mean, train_std)])
+    [transforms.Resize((112, 112)),
+     transforms.RandomHorizontalFlip(p=0.5),
+     transforms.ToTensor(),
+     transforms.Normalize(train_mean, train_std)])
 
 #transform for validation
 valid_transform = transforms.Compose(
-    [transforms.Resize((224, 224)),
-     transforms.ToTensor()])
-#     transforms.Normalize(train_mean, train_std)])
+    [transforms.Resize((112, 112)),
+     transforms.ToTensor(),
+     transforms.Normalize(train_mean, train_std)])
 
 # Apply the transformations to the datasets
 train_dataset.dataset.transform = train_transform
