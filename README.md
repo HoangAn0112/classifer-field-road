@@ -13,9 +13,12 @@ With a computer vision task like this my intuitive idea was using CNNs, which ar
 
 (3) Image preprocessing: `torchvision` can input different formats and use `transfoms` to resize all images to 112 x 112 pixels (closest size of original images to limit  distortion). All images then being normalized using average of each channel mean and std. 
 
-(2) Weighted Loss Function: Modify the loss function ` CrossEntropyLoss` to assign higher weights to the minority class (field). This gives more importance to correctly classifying samples from the minority class.
+(2) Weighted Loss Function: I picked the loss function ` CrossEntropyLoss`, while it's often associated with multi-class classification, it can also be used for binary classification and it can be easily modified to assign higher weights to the minority class (field). This gives more importance to correctly classifying samples from the minority class.
 
-(1)  Transfer Learning: Leverage pre-trained models which can help the model learn relevant features even with limited samples, these models could also generalize enough to overcome imbalance and wrong labels. I chose ` EfficientNet_b0` because it is robust and has achieved state-of-the-art performance for some tasks. It also does so with a significantly lower number of parameters, making it "efficient" in terms of both computation and memory usage compared to earlier architectures, which is more suitable for embedded systems. Moreover, I also trained a simple CNNs model to be baseline and tried another Resnet model to compare. 
+(1)  Transfer Learning: Leverage pre-trained models which can help the model learn relevant features even with limited samples, these models could also generalize enough to overcome imbalance and wrong labels. I chose ` EfficientNet_b0` because it is robust and has achieved state-of-the-art performance for some tasks. It also does so with a significantly lower number of parameters, making it "efficient" in terms of both computation and memory usage compared to earlier architectures, which is more suitable for embedded systems. Moreover, I also trained a simple CNNs model to be baseline and tried another Resnet model to compare the accuracy. 
 
+<img width="253" alt="image" src="https://github.com/HoangAn0112/classifer-field-road/assets/79208614/69367859-8a31-44b8-81a5-0a7fe8ecd8cf">
+
+* EfficientNet-Lite makes EfficientNet more suitable for mobile devices, but I go with the base EfficientNet-B0, which already available in pytorch.
 
 ## Results/ Conclusion:
