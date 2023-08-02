@@ -19,10 +19,14 @@ With a computer vision task like this my intuitive idea was using CNNs, which ar
 
 ![plot](./output/compare.png)
 
-Hyperparameter choosing: 
-
-Epoch: With a small dataset, to be cautious about overfitting I start with a relatively small number of epochs (10-20) and monitor the model's performance on both the training and validation sets, stop when validation performance plateaus (around 10)
-
-Learning rate: small (1.0e-4) to avoid converging to suboptimal solutions, for example, only guess one label (roads) 
+Hyperparameter choosing: Epoch: With a small dataset, to be cautious about overfitting I start with a relatively small number of epochs (10-20) and monitor the model's performance on both the training and validation sets, stop when validation performance plateaus (around 10). Learning rate: small (1.0e-4) to avoid converging to suboptimal solutions, for example, only guess one label (roads) 
 
 ## Results/ Conclusion:
+Baseline: with a simple CNN architecture, its model has around 60% accuracy on test set, not much higher than random guess probability.
+
+EfficientNet achieved ~100% accuracy on test set (based on my ground truth) and it also performed well with some other outsource images.
+
+Test set                   |  Additional images
+:-------------------------:|:-------------------------:
+![](./output/test_efficientnet.png)  |  ![](./output/add_efficientnet.png)
+
