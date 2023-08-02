@@ -19,10 +19,10 @@ With a computer vision task like this my intuitive idea was using CNNs, which ar
 
 ![plot](./output/compare.png)
 
-### Hyperparameter choosing: 
+Hyperparameter choosing: 
 
 Epoch: With a small dataset, to be cautious about overfitting I start with a relatively small number of epochs (10-20) and monitor the model's performance on both the training and validation sets, stop when validation performance plateaus (around 10)
 
-Learning rate: small (1.0e-4) to avoid converge to suboptimal solutions, for example, only guess one label (roads) 
+Learning rate: small (1.0e-4) to avoid converging to suboptimal solutions, for example, only guess one label (roads) 
 
 ## Results/ Conclusion:
