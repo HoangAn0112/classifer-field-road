@@ -1,7 +1,6 @@
 ## Objective
 Create a two class classifier : Field & Road using a small dataset 
 
-## Data: 
 This dataset has 153 images for training and 10 images for testing, which is relatively small. Images within the same group are quite diverse, while some from different groups could look quite the same (example: fields images contain dirt paths between crop rows) (1)
 
 The classes are imbalanced - road samples are almost double field samples, and 2 images have wrong labels (fields instead of roads) (2)
@@ -22,7 +21,7 @@ With a computer vision task like this my intuitive idea was using CNNs, which ar
 Hyperparameter choosing: Epoch: With a small dataset, to be cautious about overfitting I start with a relatively small number of epochs (10-20) and monitor the model's performance on both the training and validation sets, stop when validation performance plateaus (around 10). Learning rate: small (1.0e-4) to avoid converging to suboptimal solutions, for example, only guess one label (roads) 
 
 ## Results/ Conclusion:
-Baseline: with a simple CNN architecture, its model has around 60% accuracy on test set, not much higher than random guess probability.
+Baseline: with a simple CNN architecture, the model has around 60% accuracy on test set, not much higher than random guess probability. This network cannot understand each class and classify well images in one of them.
 
 EfficientNet achieved ~100% accuracy on test set (based on my ground truth) and it also performed well with some other outsource images (picture below). Resnet model also achieved ~100% accuracy on test set, but slightly less correct on outource images, however it has 3 times weight of EfficientNet model. 
 
