@@ -24,9 +24,16 @@ Hyperparameter choosing: Epoch: With a small dataset, to be cautious about overf
 ## Results/ Conclusion:
 Baseline: with a simple CNN architecture, its model has around 60% accuracy on test set, not much higher than random guess probability.
 
-EfficientNet achieved ~100% accuracy on test set (based on my ground truth) and it also performed well with some other outsource images.
+EfficientNet achieved ~100% accuracy on test set (based on my ground truth) and it also performed well with some other outsource images (picture below). Resnet model also achieved ~100% accuracy on test set, but slightly less correct on outource images, however it has 3 times weight of EfficientNet model. 
 
 Test set                   |  Additional images
 :-------------------------:|:-------------------------:
 ![](./output/test_efficientnet.png)  |  ![](./output/add_efficientnet.png)
+
+In summary, the objective of creating a two-class classifier for "Field" and "Road" using a small dataset was successfully achieved through the combination of data preprocessing, weighted loss functions and transfer learning. The results showcase the effectiveness of leveraging state-of-the-art models like EfficientNet, even in scenarios with limited data availability. To go achieve a smaller/faster model for embedded system, other methods can be used like few-shot learning. 
+
+## Inference 
+```
+python inference.py --model 'Efficient'
+```
 
